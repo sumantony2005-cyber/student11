@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SUMAN BR | Portfolio</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --primary-light: #eef2ff;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --bg-body: #f8fafc;
+            --bg-card: #ffffff;
+            --border: #e2e8f0;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body { background: var(--bg-body); color: var(--text-main); line-height: 1.6; overflow-x: hidden; }
+
+        /* Navigation */
+        nav {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 1.2rem 10%; background: white; position: sticky; top: 0;
+            z-index: 1000; box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .logo { font-size: 1.4rem; font-weight: 800; color: var(--primary); letter-spacing: -1px; }
+        .nav-links { display: flex; gap: 2rem; list-style: none; }
+        .nav-links li { font-weight: 500; color: var(--text-muted); cursor: pointer; transition: 0.3s; }
+        .nav-links li.active { color: var(--primary); border-bottom: 2px solid var(--primary); }
+
+        /* Section Logic */
+        section { display: none; padding: 5rem 10%; min-height: 80vh; animation: slideUp 0.4s ease-out; }
+        section.active { display: block; }
+
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Home Page Extras */
+        .home-content { text-align: center; }
+        .stat-bar { display: flex; justify-content: center; gap: 3rem; margin: 3rem 0; flex-wrap: wrap; }
+        .stat-item { text-align: center; }
+        .stat-num { font-size: 2rem; font-weight: 800; color: var(--primary); }
+        .stat-label { font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
+        
+        .expertise-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 3rem; text-align: left; }
+        .expertise-card { background: white; padding: 1.5rem; border-radius: 12px; border-left: 4px solid var(--primary); box-shadow: 0 2px 10px rgba(0,0,0,0.02); }
+
+        /* Profile & About */
+        .profile-img { width: 100%; max-width: 300px; border-radius: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); border: 5px solid white; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem; }
+        .card { background: white; padding: 2rem; border-radius: 16px; border: 1px solid var(--border); transition: 0.3s; }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+
+        /* Buttons */
+        .btn { background: var(--primary); color: white; padding: 12px 25px; border-radius: 8px; font-weight: 600; border: none; cursor: pointer; display: inline-block; text-decoration: none; }
+        
+        /* Functional Views */
+        .hidden-view { display: none; background: #ffffff; padding: 2rem; border-radius: 12px; border: 1px solid var(--border); margin-top: 2rem; }
+        .repo-header { background: #f6f8fa; padding: 1rem; border-radius: 8px 8px 0 0; border: 1px solid #d0d7de; display: flex; justify-content: space-between; }
+        .repo-body { border: 1px solid #d0d7de; border-top: none; padding: 1rem; font-family: monospace; }
+        .file-item { display: flex; align-items: center; gap: 10px; padding: 8px; border-bottom: 1px solid #f0f0f0; }
+        .file-item i { color: #54aeff; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">SUMAN BR</div>
+        <ul class="nav-links">
+            <li class="active" onclick="navigateTo('home', this)">Home</li>
+            <li onclick="navigateTo('about', this)">About</li>
+            <li onclick="navigateTo('projects', this)">Projects</li>
+            <li onclick="navigateTo('contact', this)">Contact</li>
+        </ul>
+    </nav>
+
+    <section id="home" class="active">
+        <div class="home-content">
+            <span style="background: var(--primary-light); color: var(--primary); padding: 5px 15px; border-radius: 20px; font-size: 0.8rem; font-weight: 700;">WELCOME TO MY PORTFOLIO</span>
+            <h1 style="font-size: 4rem; margin-top: 1rem;">Building <span style="color:var(--primary)">Scalable</span> Digital Solutions.</h1>
+            <p style="font-size: 1.2rem; color: var(--text-muted); max-width: 700px; margin: 1rem auto 2rem;">
+                Hi, I'm Suman . I specialize in the MERN stack and modern UI/UX principles. Currently focused on building high-performance web applications and analytics tools.
+            </p>
+            
+            <div style="display: flex; gap: 15px; justify-content: center;">
+                <button class="btn" onclick="navigateTo('projects')">Browse My Projects</button>
+                <button class="btn" style="background: #24292e;" onclick="window.open('https://github.com', '_blank')"><i class="fab fa-github"></i> GitHub Profile</button>
+            </div>
+
+            <div class="stat-bar">
+                <div class="stat-item">
+                    <div class="stat-num">15+</div>
+                    <div class="stat-label">Projects Completed</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-num">5+</div>
+                    <div class="stat-label">Tech Stack Mastered</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-num">100%</div>
+                    <div class="stat-label">Code Quality</div>
+                </div>
+            </div>
+
+            <h2 style="margin-top: 4rem;">Core Expertise</h2>
+            <div class="expertise-grid">
+                <div class="expertise-card">
+                    <i class="fas fa-laptop-code" style="color:var(--primary); font-size: 1.5rem;"></i>
+                    <h4 style="margin: 10px 0;">Frontend Dev</h4>
+                    <p style="font-size: 0.85rem; color: var(--text-muted);">Crafting responsive, high-speed interfaces using React.js and Tailwind CSS.</p>
+                </div>
+                <div class="expertise-card">
+                    <i class="fas fa-server" style="color:var(--primary); font-size: 1.5rem;"></i>
+                    <h4 style="margin: 10px 0;">Backend Architecture</h4>
+                    <p style="font-size: 0.85rem; color: var(--text-muted);">Designing robust APIs and database schemas using Node.js and MongoDB.</p>
+                </div>
+                <div class="expertise-card">
+                    <i class="fas fa-mobile-alt" style="color:var(--primary); font-size: 1.5rem;"></i>
+                    <h4 style="margin: 10px 0;">Responsive Design</h4>
+                    <p style="font-size: 0.85rem; color: var(--text-muted);">Ensuring seamless user experiences across all devices and screen sizes.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <h2>About Me</h2>
+        <div class="grid">
+            <div style="text-align: center;">
+                <img src=blob:https://web.whatsapp.com/41d68265-8a80-4eae-8161-6539df752272
+            </div>
+            <div class="card">
+                <h3>My journey</h3>
+                <p>I am a passionate developer currently in my final year of BCA. I love building web applications that solve real-world problems. My expertise lies in the MERN stack and responsive UI design.</p>
+                <div style="margin-top: 20px;">
+                    <strong>Currently Learning:</strong> Advanced AWS & System Design
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <div id="project-main-list">
+            <h2>Featured Projects</h2>
+            <div class="grid">
+                <div class="card">
+                    <i class="fas fa-chart-line" style="font-size: 2rem; color: var(--primary);"></i>
+                    <h3>Nexus Analytics</h3>
+                    <p>Real-time data tracking dashboard with interactive visualizations.</p>
+                    <button class="btn" onclick="toggleView('dashboard')" style="width:100%; margin-top:10px;">Launch Live Demo</button>
+                </div>
+                <div class="card">
+                    <i class="fas fa-shopping-cart" style="font-size: 2rem; color: #10b981;"></i>
+                    <h3>EcoStore Platform</h3>
+                    <p>MERN Stack E-commerce solution with integrated Stripe payments.</p>
+                    <button class="btn" onclick="toggleView('github')" style="width:100%; margin-top:10px; background:#24292e;">View GitHub Repo</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="dashboard-view" class="hidden-view">
+            <div style="display:flex; justify-content:space-between; margin-bottom:1rem;">
+                <h3>Nexus Analytics Live</h3>
+                <button class="btn" onclick="closeViews()" style="background:#ef4444; padding:5px 15px;">Back</button>
+            </div>
+            <canvas id="analyticsChart" height="150"></canvas>
+        </div>
+
+        <div id="github-view" class="hidden-view">
+            <div style="display:flex; justify-content:space-between; margin-bottom:1rem;">
+                <h3><i class="fab fa-github"></i> SUMAN BR / EcoStore-Platform</h3>
+                <button class="btn" onclick="closeViews()" style="background:#ef4444; padding:5px 15px;">Back</button>
+            </div>
+            <div class="repo-header"><span><strong>main</strong> branch</span><span>Updated recently</span></div>
+            <div class="repo-body">
+                <div class="file-item"><i class="fas fa-folder"></i> src/</div>
+                <div class="file-item"><i class="fas fa-file-code"></i> App.js</div>
+                <div class="file-item"><i class="fas fa-info-circle"></i> README.md</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2>Contact Me</h2>
+        <div class="card" style="max-width:600px; margin:auto;">
+            <form onsubmit="event.preventDefault(); alert('Message Sent!');">
+                <input type="text" placeholder="Your Name" required style="width:100%; padding:12px; margin-bottom:1rem; border:1px solid var(--border); border-radius:8px;">
+                <input type="email" placeholder="Email" required style="width:100%; padding:12px; margin-bottom:1rem; border:1px solid var(--border); border-radius:8px;">
+                <textarea placeholder="Your Message" rows="4" style="width:100%; padding:12px; margin-bottom:1rem; border:1px solid var(--border); border-radius:8px;"></textarea>
+                <button type="submit" class="btn" style="width:100%;">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <script>
+        function navigateTo(id, el) {
+            document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            document.querySelectorAll('.nav-links li').forEach(li => li.classList.remove('active'));
+            if(el) el.classList.add('active');
+            closeViews();
+        }
+
+        function toggleView(view) {
+            document.getElementById('project-main-list').style.display = 'none';
+            document.getElementById(view + '-view').style.display = 'block';
+            if(view === 'dashboard') initChart();
+        }
+
+        function closeViews() {
+            document.getElementById('project-main-list').style.display = 'block';
+            document.getElementById('dashboard-view').style.display = 'none';
+            document.getElementById('github-view').style.display = 'none';
+        }
+
+        function initChart() {
+            const ctx = document.getElementById('analyticsChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
+                    datasets: [{ label: 'EcoStore Sales', data: [12, 19, 3, 5, 2], backgroundColor: '#4f46e5' }]
+                }
+            });
+        }
+    </script>
+</body>
+</html>
